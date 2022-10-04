@@ -78,6 +78,17 @@ new Swiper(".promotion .swiper-container", {
   },
 }); // 슬라이드의 가운데 이미지는 클래스명+'-active'라는 클래스 이름을 지닙니다.
 
+new Swiper(".awards .swiper-container", {
+  autoplay: true,
+  loop: true,
+  spaceBetween: 30,
+  slidesPerView: 5,
+  navigation: {
+    prevEl: ".awards .swiper-prev",
+    nextEl: ".awards .swiper-next",
+  },
+});
+
 const promotionEl = document.querySelector(".promotion");
 const promotionToggleBtn = document.querySelector(".toggle-promotion");
 let isHidePromotion = false;
@@ -114,3 +125,16 @@ function floatingObject(selector, delay, size) {
 floatingObject(".floating1", 1, 15);
 floatingObject(".floating2", 0.5, 15);
 floatingObject(".floating3", 1, 20);
+
+const spyEls = document.querySelectorAll("section.scroll-spy");
+spyEls.forEach(function (spyEl) {
+  new ScrollMagic.Scene({
+    triggerElement: spyEl, //보여질 여부에 대하여 감시할려고 하는 요소를 지정
+    triggerHook: 0.8, // 뷰포트의 시작을 0, 끝을 1로 가정했을 때 해당 지점에 걸리면 실행됨을 의미
+  })
+    .setClassToggle(spyEl, "show") // 토글을 할 클래스 요소 지정, 넣었다 뻈다 할 클래스 이름
+    .addTo(new ScrollMagic.Controller());
+  // scene : 스크롤 할 때 화면이 보이는지 안보이는 지 감시하기 위함
+  // setClassToggle : class를 토글처럼 켜고 끌 수 있는 기능
+  // addTo : 스크롤 매직이 필요한 곳에 컨트롤러를 추가하기 위함
+});
